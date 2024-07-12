@@ -1,0 +1,188 @@
+# -- The base domain for Instana
+baseDomain: ""
+agentAcceptor:
+  port: 443
+subdomains:
+  # Subdomain for the agent acceptor
+  agentAcceptor: agent-acceptor
+  # Subdomain for the OTLP acceptor (gRPC)
+  otlpHttp: otlp-grpc
+  # Subdomain for the OTLP acceptor (HTTP)
+  otlpGrpc: otlp-http
+tenantUnits:
+  - unitName: unit0
+    tenantName: tenant0
+deploymentStrategyType: RollingUpdate
+# -- DH parameters for TLS.
+dhParams: ""
+# -- Repository password.
+repositoryPassword: ""
+# -- Custom CA certificate
+customCACert: ""
+emailConfig:
+  smtpConfig:
+    # -- Enables server identity verification if set to true.
+    check_server_identity: false
+    # -- From e-mail address.
+    from: ""
+    # -- Host name of the SMTP server.
+    host: ""
+    # -- Port of the SMTP server.
+    port: 25
+    # -- Enables StartTLS if set to true.
+    startTLS: false
+    # -- Enables SSL if set to true.
+    useSSL: true
+    # -- SMTP user.
+    user: ""
+    # -- SMTP password.
+    password: ""
+# -- Overrides the Docker image for the component.
+imageConfig: 
+  registry: artifact-public.instana.io
+# -- A list of image pull secrets.
+imagePullSecrets:
+  - name: instana-registry
+# -- The image pull policy.
+imagePullPolicy: IfNotPresent
+storageConfigs:
+  rawSpans:
+    pvcConfig:
+      accessModes:
+        - ReadWriteMany
+      resources:
+        requests:
+          storage: 100Gi
+      storageClassName: ""
+  eumSourceMaps:
+    pvcConfig:
+      accessModes:
+        - ReadWriteMany
+      resources:
+        requests:
+          storage: 100Gi
+      storageClassName: ""
+  synthetics: {}
+  syntheticsKeystore: {}
+# -- The resource profile
+resourceProfile: small
+# -- Global component configuration properties.
+properties: []
+# -- Global feature flags.
+featureFlags: 
+  - name: feature.beeinstana.infra.metrics.enabled
+    enabled: true
+# ServiceAccount annotations, e.g. for workload identity/IRSA
+serviceAccountAnnotations: {}
+# -- Service provider configuration for SAML or OIDC.
+serviceProviderConfig: ""
+# -- Overrides component default configurations.
+componentConfigs: []
+datastores:
+  cassandra:
+    # -- Cassandra host
+    hosts: ["instana-cassandra-service.instana-cassandra.svc"]
+    # -- Cassandra datacenter
+    datacenter: cassandra
+    # -- Cassandra replication factor
+    replicationFactor: 1
+    # -- Cassandra admin user
+    adminUser: instanaadmin
+    # -- Cassandra admin password
+    adminPassword: ""
+    # -- Cassandra user
+    user: instana
+    # -- Cassandra password
+    password: ""
+  clickhouse:
+    # -- ClickHouse host
+    hosts: ["chi-clickhouse-local-0-0.instana-clickhouse.svc", "chi-clickhouse-local-0-1.instana-clickhouse.svc"]
+    clusterName: local
+    # -- ClickHouse admin user
+    adminUser: instanaadmin
+    # -- ClickHouse admin password
+    adminPassword: ""
+    # -- ClickHouse user
+    user: instanaadmin
+    # -- ClickHouse password
+    password: ""
+  kafka:
+    # -- Kafka host
+    hosts: ["kafka-kafka-bootstrap.instana-kafka.svc"]
+    # -- Kafka SASL mechanism.
+    saslMechanism: SCRAM-SHA-512
+    # -- Kafka replication factor
+    replicationFactor: 1
+    # -- Kafka admin user
+    adminUser: instanaadmin
+    # -- Kafka admin password
+    adminPassword: ""
+    # -- Kafka consumer user
+    consumerUser: instana
+    # -- Kafka consumer password
+    consumerPassword: ""
+    # -- Kafka producerUser
+    producerUser: instana
+     # -- Kafka producer password
+    producerPassword: ""
+  elasticsearch:
+    # -- Elasticsearch hosts
+    hosts: ["elasticsearch-es-http.instana-elastic.svc"]
+    clusterName: instana
+    # -- Elasticsearch admin user
+    adminUser: instanaadmin
+    # -- Elasticsearch admin password
+    adminPassword: ""
+    # -- Elasticsearch user
+    user: instana
+    # -- Elasticsearch password
+    password: ""
+  beeInstana:
+    # -- BeeInstana host
+    hosts: ["aggregators.instana-beeinstana.svc"]
+    # -- BeeInstana user
+    user: instana
+    # -- BeeInstana password
+    password: ""
+  postgres:
+    # -- Postgres host
+    hosts: ["postgres-rw.instana-postgres.svc"]
+    # -- Postgres admin user
+    adminUser: instanaadmin
+    # -- Postgres admin password
+    adminPassword: ""
+    # -- Postgres user
+    user: instana
+    # -- Postgres password
+    password: ""
+proxyConfig:
+  # -- The host name or IP address.
+  host: ""
+  # -- Proxy port.
+  port: 80
+  # -- List of non-proxy hosts.
+  nonProxyHosts: []
+  # -- Proxy user.
+  user: ""
+  # -- Proxy password.
+  password: ""
+# -- Operator operation mode. One of 'normal' or 'maintenance'.
+operationMode: normal
+# -- Global environment variables.
+env: []
+# -- URL for downloading the GeoLite2 geolocation data file.
+geoDbUrl: ""
+# The Kubernetes priority class
+priorityClassName: ""
+
+tokenSecret: ""
+
+cert:
+  # -- Certificate file.
+  crt: ""
+  # -- Private key file.
+  key: ""
+
+
+services: []
+      
