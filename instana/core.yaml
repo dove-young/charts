@@ -51,7 +51,7 @@ storageConfigs:
   rawSpans:
     pvcConfig:
       accessModes:
-        - ReadWriteOnce
+        - ReadWriteMany
       resources:
         requests:
           storage: 100Gi
@@ -59,7 +59,7 @@ storageConfigs:
   eumSourceMaps:
     pvcConfig:
       accessModes:
-        - ReadWriteOnce
+        - ReadWriteMany
       resources:
         requests:
           storage: 100Gi
