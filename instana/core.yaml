@@ -17,6 +17,8 @@ deploymentStrategyType: RollingUpdate
 dhParams: ""
 # -- Repository password.
 repositoryPassword: ""
+# -- SalesKey
+salesKey: ""
 # -- Custom CA certificate
 customCACert: ""
 emailConfig:
@@ -49,7 +51,7 @@ storageConfigs:
   rawSpans:
     pvcConfig:
       accessModes:
-        - ReadWriteMany
+        - ReadWriteOnce
       resources:
         requests:
           storage: 100Gi
@@ -57,13 +59,11 @@ storageConfigs:
   eumSourceMaps:
     pvcConfig:
       accessModes:
-        - ReadWriteMany
+        - ReadWriteOnce
       resources:
         requests:
           storage: 100Gi
       storageClassName: ""
-  synthetics: {}
-  syntheticsKeystore: {}
 # -- The resource profile
 resourceProfile: small
 # -- Global component configuration properties.
@@ -183,6 +183,4 @@ cert:
   # -- Private key file.
   key: ""
 
-
 services: []
-      
