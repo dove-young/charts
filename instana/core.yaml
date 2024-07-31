@@ -35,10 +35,6 @@ emailConfig:
     startTLS: false
     # -- Enables SSL if set to true.
     useSSL: true
-    # # -- SMTP user.
-    # user: ""
-    # # -- SMTP password.
-    # password: ""
 # -- Overrides the Docker image for the component.
 imageConfig: 
   registry: artifact-public.instana.io
